@@ -1,9 +1,6 @@
-FROM alpine:latest
+FROM mfrancis95/chocolate-doom-base
 
-RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
-    apk update && \
-    apk add autoconf automake build-base git sdl2-dev sdl2_mixer-dev sdl2_net-dev && \
-    git clone https://github.com/mfrancis95/crispy-multiplayer-doom
+RUN git clone https://github.com/mfrancis95/crispy-multiplayer-doom
 
 WORKDIR crispy-multiplayer-doom
 
