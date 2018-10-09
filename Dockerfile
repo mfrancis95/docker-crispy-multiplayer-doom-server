@@ -1,11 +1,13 @@
-FROM mfrancis95/chocolate-doom-base
+FROM mfrancis95/chocolate-doom-build
 
 RUN git clone https://github.com/mfrancis95/crispy-multiplayer-doom
 
 WORKDIR crispy-multiplayer-doom
 
-RUN ./autogen.sh && make
+RUN ./autogen.sh && make install
 
-EXPOSE 2342/udp
+FROM mfrancis95/chocolate-doom-base
 
-ENTRYPOINT src/crispy-doom -dedicated -privateserver
+COPY --from=0 /usr/local/bin/crispy-doom /usr/local/bin/crispy-doom
+
+ENTRYPOINT crispy-doom -dedicated -privateserver
